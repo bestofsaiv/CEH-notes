@@ -1,0 +1,196 @@
+	- Log in for ASPEN, any vouchers, Government ID
+	- Log in / link for the github account cheatsheet
+		○ Any other cheat sheet
+		○ Udemy link
+		○ AI on demand
+
+	1. Do nmap & zenmap scan save results
+		
+	2. Get the geeksforgeeks link for nmap
+		a. Check dabaleshwar notes
+		b. Cavemenctech
+	
+	Pwd - to see which directory we in
+	
+	Nmap:
+	- Use -A for aggressive scan at the start -> save results to a text file : 
+	
+	• Nmap -Pn : used to scan hosts that are behind firewalls -> important
+	
+	What info from nmap:
+		○ To see what services are running
+			§ For eg. RDP : 3389 : so you can use RDP login - & then apply things below
+	
+
+	2. For RDP(3389) in Windows - connect to a random IP and check users:
+	• Use RDP
+		○ Log in with given username, IP address
+		○ Go to cmd
+		○ Ipconfig - to check correct address is logged in
+		○ Use "net user" 
+			§ To confirm legit users
+	
+	
+	3. For wpcan :
+		a. Wpscan --url IP addr
+		b. Use user.txt & pwd.txt
+	4. Hydra usage:
+		a. After using hydra 
+			i. When using a list use -L. to bruteforce
+			ii. And when using to bruteforce for a single user, use small l
+		b. Use get secret.txt 
+	5. How to enable sgpt ?
+	6. Android :
+		sudo apt update
+		sudo apt install android-tools-adb android-tools-fastboot
+		a. Check in an IP if port 5555 is open for adb 
+		b. It is an android device
+		c. adb <connect IP>:5555    
+1. For Windows Stuff:
+	1. For Stego - download snow 
+		a. Or openstego
+	2. Download VeraCrypt
+		a. Encrypt any volume
+			i. If the question is : encrypted folder or drive or file - use veracrypt
+	3. Use hashes.com | crackstation | Bctextencoder
+		a. For SHA1 type hashes
+	4. Encrypt/Decrypt
+		a. RC4 -  keysize 14 bit CrypTool
+		b. CypTool -> symmetric -> ecnrypt modern -> DEC (ECB)
+			i. -> might get some creds or pwd for a username
+			ii. Login to FTP using <ftp:IP addr -> then use username & pwd obtained
+2. For SQL injection:
+	1. OWASP ZAP
+		a. Quick start -> Automated Scanning
+		b. Check if its GET or POST ->
+			i. Post - sensitive txn 
+3. For WireShark:
+	1. Select interface (wifi ) if needed
+	2. 3 types of pcap files for questions 
+		a. Select & scroll to end - for uname, pwd
+		b. Right clikc -> click Follow
+4. Cheatsheet links:
+	1. https://github.com/Samsar4/Ethical-Hacking-Labs/tree/master/0-Core-Knowledge
+	2. https://github.com/JoasASantos/Guide-CEH-Practical-Master?source=post_page-----1239fa3e6f1a---------------------------------------
+	3. https://github.com/cmuppin/CEH/tree/main
+	4. https://github.com/dhabaleshwar/CEHPractical/tree/main
+	
+	
+
+Sample situations:
+	1. Start with an aggressive scan -A
+	2. MYSQL port : 3306
+		a. When doing nmap scan :
+			i. Find the IP with this service running -> then apply nmap to the IP with -O to find OS version
+	3. Use nmap :
+		a. 6-7 addresses maybe available
+		b. nmap -Pn -p -sV 3389 IP. -> checks if a port is open
+	4. Windows~ For FTP -> after using DES(ECB) ->
+		a. Symmetric -> decrypt-> get creds
+		b. Now go to cmd ->
+			i.  ftp <IP> 
+			ii. get file.txt
+	5. Use snow tool :
+		a. Open a file with a pwd if stegango is used on it
+	6. Use msfconsole instead of wpscan
+	7. Use hashes.com
+	8. Use login creds of a previous questions (RDP) one for example
+		a. Windows vs parrot just identify
+	9. DoS -> wireshark
+
+	11. Find the IP that has FTP (21)open
+		a. Use hydra : with /home/wordlists  -P /home pwd.txt ftp://IP addr
+		b. Or if username is given :
+			i. Hydra -l user -P pawd.txt
+			ii. get flag.txt
+	12. Nmap scan:
+		a. IP running "server2019" name of IP for example
+		b. RDP -> if its open
+	13. Use ' 1=1
+		a. IDOR vuln (change ID value). ---> check again
+		b. OWASP ZAP :
+			i. Automated Scan
+	14. Wirshark
+		a. Paste the filter -> check creds
+	15. Nmap -sn : how many hosts are up
+	16. VeraCrypt
+	17. CrypToll:
+		a. RC4 -> 14 key
+	19. Use android:
+		a. Scan nmap and whichever IP has 5555 open ->
+		b. Use adb connect & adb shell
+	20. BCTextEncoder
+		
+	
+	
+------
+
+
+File Sharing:
+	File Sharing Between Windows and Parrot:
+	1. On the Windows machine, create a shared folder and drop any text files or tools you need into it.
+	2. Then, on the Parrot Linux machine, mount that shared folder using the SMB protocol like this:
+	3. sudo nano /etc/fstab
+	4. //Windows_IP/Share_Name /home/attacker/Desktop/Windows-File-Transfer cifs credentials=/etc/smb-credentials,vers=3.0,uid=1000,gid=1000,iocharset=utf8,_netdev 00 I
+	 
+	5. Once mounted, you can directly access and copy-paste data from the shared folder between the two environments.
+	6. This saved me a lot of time compared to other methods. Just remember to create the /mnt/windows-share directory beforehand if it doesn’t exist.
+	7. See how u go with this.
+
+
+
+From Rakuten AI:
+
+	
+	5.  How to Transfer Files (Mac Host <-> Parrot OS VM; Parrot OS VM <-> Windows OS VM)
+	-   **Mac Host to Parrot OS VM (e.g., THM VPN file):**
+	-   **Method 1: Shared Directory (Recommended)**
+            1.  Shut down Parrot OS VM.
+            2.  In UTM, select Parrot VM, click "Edit" (pencil icon).
+            3.  Go to "Sharing" tab.
+            4.  Click "Browse" next to "Shared Directory", choose a Mac folder.
+            5.  Uncheck "Read Only" if needed. Click "Save".
+            6.  Start Parrot OS VM.
+            7.  In Parrot OS file manager, look for mounted share (e.g., `/media/qemu/UTM_Shared`, `/media/QEMU_SHARE`, or `/mnt/qemu_share`).
+            8.  If not found, try `ls /media` or `ls /mnt`.
+            9.  Manual mount (if needed): `sudo mkdir /mnt/shared_folder`; `sudo mount -t 9p -o trans=virtio,version=9p2000.L share /mnt/shared_folder`
+            10. Copy files: `cp /path/to/shared_folder/thm.ovpn ~/`
+	-   **Method 2: Cloud Storage**
+            1.  Upload file to cloud (Google Drive, Dropbox) from Mac.
+            2.  Download from cloud service in Parrot OS browser.
+	-   Method 3: HTTP Server (Mac to Parrot)
+            1.  On Mac: `cd /path/to/files`; `python3 -m http.server 8000`
+            2.  Note Mac's IP.
+            3.  In Parrot OS browser: Go to `http://<Your_Mac_IP_Address>:8000`. Download file.
+            4.  On Mac: `Ctrl+C` to stop server.
+
+	-   Parrot OS VM <-> Windows OS VM:
+	-   Method 1: Python HTTP Server (Parrot to Windows)
+            1.  **In Parrot OS:** `cd /path/to/file`; `python3 -m http.server 8000`
+            2.  Note Parrot OS IP (`ip a` or `ifconfig`).
+            3.  **In Windows VM:** Open browser, go to `http://<Parrot_OS_IP_Address>:8000`. Download file.
+	-   **Method 2: SMB Share (Windows File Sharing)**
+            1.  **On Windows VM (Share a Folder):**
+                -   Create folder (e.g., `C:\Share`).
+                -   Right-click folder > `Properties` > `Sharing` > `Advanced Sharing...`
+                -   Check `Share this folder`. Set `Permissions` for "Everyone" to `Full Control` (for lab).
+                -   **Crucial:** Temporarily disable Windows Firewall or add rule for SMB (ports 139, 445).
+            2.  **On Parrot OS (Access the Share):**
+                -   `sudo apt update && sudo apt install cifs-utils -y`
+                -   `sudo mkdir /mnt/windows_share`
+                -   `sudo mount -t cifs //<Windows_VM_IP_Address>/Share /mnt/windows_share -o username=Guest,password=""` (or with actual credentials)
+                -   `cd /mnt/windows_share` to access.
+                -   `sudo umount /mnt/windows_share` to unmount.
+	-   **Method 3: SCP (Secure Copy Protocol - if SSH server installed on target)**
+            -   Less common for Windows, but possible if OpenSSH server is installed.
+            -   `scp C:\path\to\file.txt yourusername@<Parrot_OS_IP>:/home/yourusername/` (from Windows to Parrot)
+	-   **Method 4: Netcat (nc) - For quick, raw transfers**
+            -   **Receiving (e.g., Parrot):** `nc -lvnp 1234 > received_file.txt`
+            -   **Sending (e.g., Windows, with `nc` or PowerShell):** `nc <Parrot_OS_IP> 1234 < file_to_send.txt`
+	-   **Recommended for your needs:**
+        -   **Mac Host to Parrot OS:** Use **Shared Directory** in UTM.
+        -   **Parrot OS to Windows VM:** Use **Python HTTP Server** from Parrot OS.
+        -   **Windows VM to Parrot OS:** Use **SMB Share** from Windows, then mount in Parrot OS.
+
+
+
