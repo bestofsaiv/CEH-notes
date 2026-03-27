@@ -192,5 +192,8 @@ From Rakuten AI:
         -   **Parrot OS to Windows VM:** Use **Python HTTP Server** from Parrot OS.
         -   **Windows VM to Parrot OS:** Use **SMB Share** from Windows, then mount in Parrot OS.
 
+--> for entropy : check tool ent <elf>
+sha384sum of elf file -> get digits
+
 
 
