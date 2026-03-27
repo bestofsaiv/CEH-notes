@@ -195,5 +195,14 @@ From Rakuten AI:
 --> for entropy : check tool ent <elf>
 sha384sum of elf file -> get digits
 
+nmap -sV -p 22 Ip of subnet ;
+if p 22 is open -> do privelege escalation with user & pwd
+sudo -l & sudo -i -> become root & 
+cd / & find . -name .txt file
+
+nmap -Pn --script vuln IP addr
+Search on CVE / NVD (or) just input 10
+
+Use OpenStego -> extract data from img
 
 
